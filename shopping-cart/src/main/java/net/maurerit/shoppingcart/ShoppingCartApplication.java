@@ -38,10 +38,9 @@ public class ShoppingCartApplication {
         return new ApiInfoBuilder()
                 .title("Simple Shopping Cart Service")
                 .description("Shopping Cart Service with Spring REST and Swagger")
-//                .termsOfServiceUrl("http://www-03.ibm.com/software/sla/sladb.nsf/sla/bm?Open")
                 .contact(new Contact("Matt Maurer", "https://github.com/maurerit", "maurer.it@gmail.com"))
                 .license("Apache License Version 2.0")
-//                .licenseUrl("https://github.com/IBM-Bluemix/news-aggregator/blob/master/LICENSE")
+                .licenseUrl("https://github.com/maurerit/microservices-playground/blob/master/LICENSE")
                 .version("1.0")
                 .build();
     }
