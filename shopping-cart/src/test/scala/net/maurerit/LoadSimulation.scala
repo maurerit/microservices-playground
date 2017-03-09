@@ -51,7 +51,7 @@ class LoadSimulation extends Simulation {
     val addItemToCart = exec(
       http("add_item_to_cart")
         .post("/cart/${shoppingCartId}")
-        .body(StringBody("""{ "itemId": "${itemId}", "price":${price}, "quantity":${quantity}, "status":"SHOPPING" }""")).asJSON
+        .body(StringBody("""{ "itemId": ${itemId}, "price":${price}, "quantity":${quantity}, "status":"SHOPPING" }""")).asJSON
     )
 
     val checkout = exec(
@@ -66,10 +66,10 @@ class LoadSimulation extends Simulation {
       ShoppingCart.getCurrentCart,
       ShoppingCart.getByCartId
     )
-    .feed(ShoppingCart.price)
-    .feed(ShoppingCart.quantity)
     .repeat(80) {
       feed(ShoppingCart.items)
+      .feed(ShoppingCart.price)
+      .feed(ShoppingCart.quantity)
       .exec(
         ShoppingCart.addItemToCart
       )
@@ -80,7 +80,7 @@ class LoadSimulation extends Simulation {
 
   setUp (
     cartOperations.inject(
-      rampUsers(160) over (10 seconds)
+      rampUsers(40) over (10 seconds)
     )
   ).protocols(httpProtocol)
 }

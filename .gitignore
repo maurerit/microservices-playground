@@ -5,3 +5,6 @@ target
 *.jar
 
 shopping-cart/src/**/application.yml
+
+loadtests
+.venv

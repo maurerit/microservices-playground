@@ -49,7 +49,7 @@ paths:
           description: "Forbidden"
         404:
           description: "Not Found"
-      x-swagger-router-controller: "swagger_server.controllers.shopping cart_controller"
+      x-swagger-router-controller: "swagger_server.controllers.shopping_cart_controller"
   /cart/{cartId}:
     get:
       tags:
@@ -85,7 +85,7 @@ paths:
           description: "Shopping Cart Not Found"
           schema:
             $ref: "#/definitions/ApiResponse"
-      x-swagger-router-controller: "swagger_server.controllers.shopping cart_controller"
+      x-swagger-router-controller: "swagger_server.controllers.shopping_cart_controller"
     post:
       tags:
       - "Shopping Cart"
@@ -132,7 +132,7 @@ paths:
           description: "Item already exists, modify quantity instead"
           schema:
             $ref: "#/definitions/ApiResponse"
-      x-swagger-router-controller: "swagger_server.controllers.shopping cart_controller"
+      x-swagger-router-controller: "swagger_server.controllers.shopping_cart_controller"
     patch:
       tags:
       - "Shopping Cart"
@@ -165,7 +165,7 @@ paths:
           description: "Shopping Cart Not Found"
           schema:
             $ref: "#/definitions/ApiResponse"
-      x-swagger-router-controller: "swagger_server.controllers.shopping cart_controller"
+      x-swagger-router-controller: "swagger_server.controllers.shopping_cart_controller"
   /cart/{cartId}/{itemId}:
     patch:
       tags:
@@ -211,7 +211,7 @@ paths:
           description: "Cart/Item not found"
           schema:
             $ref: "#/definitions/ApiResponse"
-      x-swagger-router-controller: "swagger_server.controllers.shopping cart_controller"
+      x-swagger-router-controller: "swagger_server.controllers.shopping_cart_controller"
 definitions:
   ShoppingCart:
     type: "object"
