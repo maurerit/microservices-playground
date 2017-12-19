@@ -117,6 +117,18 @@ public class ShoppingCartItem implements Serializable {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "ShoppingCartItem{" +
+                "shoppingCartId=" + shoppingCartId +
+                ", itemId=" + itemId +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", cart=" + cart +
+                ", status=" + status +
+                '}';
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="shopping_cart_id", updatable = false, insertable = false)
     public ShoppingCart getCart() {

@@ -8,7 +8,7 @@ import scala.util.Random
 
 class LoadSimulation extends Simulation {
   val httpProtocol = http
-    .baseURL("http://localhost:8080")
+    .baseURL(Configuration.baseUrl)
     .inferHtmlResources()
     .acceptHeader("application/json")
     .acceptEncodingHeader("gzip, deflate")
@@ -18,20 +18,20 @@ class LoadSimulation extends Simulation {
   object ShoppingCart {
     val headers = Map(
       "Content-Type" -> "application/json",
-      "Origin" -> "http://localhost:8080:"
+      "Origin" -> Configuration.baseUrl
     )
 
     val users = Iterator.continually(
       Map("userId" -> Random.nextLong())
     )
     val items = Iterator.continually(
-      Map("itemId" -> Random.nextLong())
+      Map("itemId" -> Random.nextInt(100000))
     )
     val price = Iterator.continually(
-      Map("price" -> Random.nextLong())
+      Map("price" -> Random.nextInt(6000000))
     )
     val quantity = Iterator.continually(
-      Map("quantity" -> Random.nextInt(Integer.MAX_VALUE))
+      Map("quantity" -> Random.nextInt(40))
     )
 
     val getCurrentCart = exec(
@@ -60,13 +60,13 @@ class LoadSimulation extends Simulation {
     )
   }
 
-  val cartOperations = scenario("Get the Users current cart")
+  val cartOperations = scenario("Shop and checkout")
     .feed(ShoppingCart.users)
     .exec(
       ShoppingCart.getCurrentCart,
       ShoppingCart.getByCartId
     )
-    .repeat(80) {
+    .repeat(Configuration.itemsPerCart) {
       feed(ShoppingCart.items)
       .feed(ShoppingCart.price)
       .feed(ShoppingCart.quantity)
@@ -80,7 +80,7 @@ class LoadSimulation extends Simulation {
 
   setUp (
     cartOperations.inject(
-      rampUsers(40) over (10 seconds)
+      rampUsers(Configuration.users) over (Configuration.rampUpTime seconds)
     )
   ).protocols(httpProtocol)
 }

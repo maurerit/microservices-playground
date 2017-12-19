@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(basePath = "/cart", value = "Shopping Cart", description = "Operations with Shopping Carts", produces = "application/json")
 @RestController
 public class ShoppingCartService extends AbstractService {
-    private static final Logger LOGGER = LoggerFactory.getLogger( ShoppingCartService.class );
+    private static final Logger logger = LoggerFactory.getLogger( ShoppingCartService.class );
 
     @Autowired
     private BaseShoppingCartRepository cartRepo;
@@ -42,6 +42,7 @@ public class ShoppingCartService extends AbstractService {
                     Long customerId
     )
     {
+        logger.debug("ResponseEntity<ShoppingCart> getShoppingCart({}) called", customerId);
         ShoppingCart cart = cartRepo.findByCustomerIdAndStatus(customerId, ShoppingCartStatus.SHOPPING);
 
         if (cart == null) {
@@ -68,11 +69,13 @@ public class ShoppingCartService extends AbstractService {
                     Long cartId
     )
     {
+        logger.debug("ResponseEntity<ShoppingCart> getByCartId({}) called", cartId);
         ShoppingCart cart = cartRepo.findByShoppingCartId(cartId);
 
         if (cart != null) {
             return ResponseEntity.ok(cart);
         } else {
+            logger.error("No cart exists for cartId: {}", cartId);
             throw new NotFoundException(net.maurerit.shoppingcart.model.ApiResponse.ERROR, "Cart " + cartId + " not found");
         }
     }
@@ -89,12 +92,14 @@ public class ShoppingCartService extends AbstractService {
                     Long cartId
     )
     {
+        logger.debug("ResponseEntity<Boolean> checkout ({}) called", cartId);
         ShoppingCart cart = cartRepo.findByShoppingCartId(cartId);
         cart.setStatus( ShoppingCartStatus.ORDERED );
         cart = cartRepo.save( cart );
 
         if ( cart.getItems() != null && !cart.getItems().isEmpty() ) {
             cart.getItems().forEach( item -> {
+                logger.debug("Setting {} on {} and saving it", ShoppingCartStatus.ORDERED, item);
                 item.setStatus( ShoppingCartStatus.ORDERED );
                 //TODO: Do this in a batch
                 itemRepo.save( item );
@@ -104,6 +109,7 @@ public class ShoppingCartService extends AbstractService {
         if (cart != null) {
             return ResponseEntity.ok(true);
         } else {
+            logger.error("No cart exists for cartId: {}", cartId);
             throw new NotFoundException(net.maurerit.shoppingcart.model.ApiResponse.ERROR, "Cart " + cartId + " not found");
         }
     }
@@ -124,6 +130,7 @@ public class ShoppingCartService extends AbstractService {
             @RequestBody
                     ShoppingCartItem item
     ) {
+        logger.debug("ResponseEntity<Boolean> addItemToCard ({}, {}) called", cartId, item);
         if ( item == null ) {
             throw new BadRequestException( net.maurerit.shoppingcart.model.ApiResponse.ERROR, "Item cannot be null" );
         }

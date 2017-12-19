@@ -83,6 +83,11 @@
             <artifactId>gatling-charts-highcharts</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>de.siegmar</groupId>
+            <artifactId>logback-gelf</artifactId>
+            <version>1.0.4</version>
+        </dependency>
     </dependencies>
 
     <profiles>
