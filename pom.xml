@@ -13,6 +13,7 @@
         <module>shopping-cart-jdbc-dao</module>
         <module>shopping-cart-dao-spi</module>
         <module>api-exceptions</module>
+        <module>gateway-server</module>
     </modules>
 
     <parent>

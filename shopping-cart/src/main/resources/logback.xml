@@ -1,6 +1,6 @@
 <configuration>
     <appender name="GELF" class="de.siegmar.logbackgelf.GelfTcpAppender">
-        <graylogHost>localhost</graylogHost>
+        <graylogHost>graylog-collector.graylog.zone</graylogHost>
         <graylogPort>12201</graylogPort>
     </appender>
 

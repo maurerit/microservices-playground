@@ -9,6 +9,11 @@ endpoints:
   health:
     sensitive: false
 
+eureka:
+  client:
+    service-url:
+        defaultZone: http://discovery-server.graylog.zone:8761
+
 #zuul:
 #  ignoredServices: "*"
 #  routes:

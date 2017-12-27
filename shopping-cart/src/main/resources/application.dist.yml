@@ -6,6 +6,12 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
   jmx:
     enabled: false
+
+eureka:
+  client:
+    service-url:
+        defaultZone: http://discovery-server.graylog.zone:8761
+
 #logging:
 #  level:
 #    net.maurerit: DEBUG

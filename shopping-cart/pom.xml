@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>shopping-cart</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -124,24 +125,35 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
                 <configuration>
                     <goalPrefix>gatling</goalPrefix>
                     <simulationClass>net.maurerit.LoadSimulation</simulationClass>
                     <jvmArgs>
-                        <jvmArg>-Dusers=1</jvmArg>
-                        <jvmArg>-DbaseUrl=http://localhost:6767</jvmArg>
+                        <jvmArg>-Dusers=10</jvmArg>
+                        <jvmArg>-DbaseUrl=http://localhost:8080</jvmArg>
                         <jvmArg>-Dduration=30</jvmArg>
                     </jvmArgs>
                 </configuration>
                 <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>test</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>execute</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
+                <!--<execution>-->
+                <!--<phase>test</phase>-->
+                <!--<goals>-->
+                <!--<goal>execute</goal>-->
+                <!--</goals>-->
+                <!--</execution>-->
                 <!--</executions>-->
             </plugin>
         </plugins>
