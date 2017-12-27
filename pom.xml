@@ -39,6 +39,7 @@
         <mariadb-version>1.5.8</mariadb-version>
         <gatling.version>2.2.0</gatling.version>
         <gatling-plugin.version>2.2.0</gatling-plugin.version>
+        <logback-gelf.version>1.0.4</logback-gelf.version>
     </properties>
 
     <dependencyManagement>
@@ -74,6 +75,11 @@
                 <groupId>org.mariadb.jdbc</groupId>
                 <artifactId>mariadb-java-client</artifactId>
                 <version>${mariadb-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.siegmar</groupId>
+                <artifactId>logback-gelf</artifactId>
+                <version>${logback-gelf.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.gatling.highcharts</groupId>
