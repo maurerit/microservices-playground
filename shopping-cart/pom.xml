@@ -80,14 +80,14 @@
             <artifactId>mariadb-java-client</artifactId>
         </dependency>
         <dependency>
+            <groupId>de.siegmar</groupId>
+            <artifactId>logback-gelf</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.siegmar</groupId>
-            <artifactId>logback-gelf</artifactId>
-            <version>1.0.4</version>
         </dependency>
     </dependencies>
 
@@ -139,7 +139,6 @@
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
                 <configuration>
-                    <goalPrefix>gatling</goalPrefix>
                     <simulationClass>net.maurerit.LoadSimulation</simulationClass>
                     <jvmArgs>
                         <jvmArg>-Dusers=10</jvmArg>
