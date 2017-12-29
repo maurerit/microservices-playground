@@ -12,7 +12,7 @@ endpoints:
 eureka:
   client:
     service-url:
-        defaultZone: http://discovery-server.graylog.zone:8761
+        defaultZone: http://discovery-server.graylog.zone:8761/eureka
 
 #zuul:
 #  ignoredServices: "*"
